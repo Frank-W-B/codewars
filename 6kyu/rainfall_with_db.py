@@ -30,46 +30,6 @@ towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tok
          "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
 
 
-#### Code wars submitted solution
-import pandas as pd
-import numpy as np
-
-def parse_data(data_r):
-    '''Parses raw data into a pandas dataframe'''
-    lines = data_r.split('\n')
-    cities = [] 
-    rainfall_by_city = [] 
-    for line in lines:
-        if len(line) > 1:
-            city = line.split(':')[0]
-            cities.append(city) 
-            month_rainfalls = line.split(':')[1]
-            month_rainfall = month_rainfalls.split(',')
-            months = [m_r.split(' ')[0] for m_r in month_rainfall]
-            rainfall = np.array([m_r.split(' ')[1] for m_r in month_rainfall]).astype(float)
-            rainfall_by_city.append(rainfall)
-    columns = months
-    index = cities
-    df = pd.DataFrame(columns=columns, index = cities, data=rainfall_by_city)
-    return df
-
-def mean(town, strng):
-    '''Returns the mean rainfall for the city'''
-    df = parse_data(strng)
-    means = df.mean(axis=1)
-    if town in df.index:
-        return means.loc[town]
-    else:
-        return -1
-
-def variance(town, strng):
-    ''' Returns the rainfall variance for the city'''
-    df = parse_data(strng)
-    var = df.var(axis=1, ddof=0)
-    if town in df.index:
-        return var.loc[town]
-    else:
-        return -1
 
 ### CW best practice/interesting solution:
 import statistics, re
@@ -92,9 +52,6 @@ if __name__ == '__main__':
     #assertFuzzyEquals(variance("Beijing", data), 4808.37138888889)
     town = 'London'
     data = data
-    ## mine 
-    print("City: {0}, mean rainfall: {1}".format(town, mean(town, data)))
-    print("City: {0}, rainfall var : {1}".format(town, variance(town, data)))
     ## best practice
     print("City: {0}, mean rainfall: {1}".format(town, mean_bp(town, data)))
     print("City: {0}, rainfall var : {1}".format(town, variance_bp(town, data)))
