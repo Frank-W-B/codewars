@@ -8,3 +8,6 @@
 
 ### Deactivate virtual environment
 `$ deactivate`
+
+### Run unittests in kyu folder
+`$ python -m unittest tests/test_<name_of_file>.py`
