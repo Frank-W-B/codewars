@@ -3,7 +3,7 @@ import remove_first_last_character as rflc
 
 
 class TestRemoveFirstLastCharacter(unittest.TestCase):
-    # Test cases 
+    # Test cases
     # "1,2,3"      =>  "2"
     # "1,2,3,4"    =>  "2 3"
     # "1,2,3,4,5"  =>  "2 3 4"
